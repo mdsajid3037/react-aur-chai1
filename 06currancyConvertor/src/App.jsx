@@ -1,41 +1,39 @@
 import { useState } from 'react'
-import {InputBox} from './components/InputBox'
-import useCurrancyInfo from "./hooks/useCurrencyInfo"
+import {InputBox} from './components'
+import useCurrencyInfo from './hooks/useCurrencyInfo'
 
 
 function App() {
-  const [amount, setAmount] = useState(0);
-  const [from , setFrom] = useState("pkr")
-  const [to , setTo] = useState("inr")
-  const [ConvertedAmount, setConvertedAmount] = useState(0);
- 
-  const currencyInfo = useCurrancyInfo(from);
 
-  const options = Object.keys(currencyInfo);
+  const [amount, setAmount] = useState(0)
+  const [from, setFrom] = useState("inr")
+  const [to, setTo] = useState("usd")
+  const [convertedAmount, setConvertedAmount] = useState(0)
 
-  const swap =()=>{
-       setFrom(to);
-       setTo(from);
-     setConvertedAmount(amount)
-     setAmount(ConvertedAmount)
+  const currencyInfo = useCurrencyInfo(from)
+
+  const options = Object.keys(currencyInfo)
+
+  const swap = () => {
+    setFrom(to)
+    setTo(from)
+    setConvertedAmount(amount)
+    setAmount(convertedAmount)
   }
-
-  const convert = () =>{
+  
+  const convert = () => {
     setConvertedAmount(amount * currencyInfo[to])
   }
- 
+
   return (
     <div
-        className="w-full h-screen flex justify-end  items-center  bg-cover bg-no-repeat"
+        className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
         style={{
-            backgroundImage: `url('https://images.pexels.com/photos/68912/pexels-photo-68912.jpeg?auto=compress&cs=tinysrgb&w=600')`,
+            backgroundImage: `url('https://images.pexels.com/photos/3532540/pexels-photo-3532540.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')`,
         }}
-      >
-        <div className="w-full flex justify-end  items-auto "
-          
-          >
-            <img className="w-400 " src="https://images.pexels.com/photos/5928815/pexels-photo-5928815.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" alt="" />
-            <div className="w-full max-w-md   border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30">
+    >
+        <div className="w-full">
+            <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30">
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
@@ -44,12 +42,11 @@ function App() {
                     }}
                 >
                     <div className="w-full mb-1">
-                    <InputBox
+                        <InputBox
                             label="From"
                             amount={amount}
                             currencyOptions={options}
                             onCurrencyChange={(currency) => setAmount(amount)}
-                          
                             selectCurrency={from}
                             onAmountChange={(amount) => setAmount(amount)}
                         />
@@ -66,12 +63,10 @@ function App() {
                     <div className="w-full mt-1 mb-4">
                         <InputBox
                             label="To"
-                            amount={ConvertedAmount}
+                            amount={convertedAmount}
                             currencyOptions={options}
-                            onCurrancyChanger={(currency)=>
-                              setTo(currency)
-                            }
-                          selectCurrency={to}
+                            onCurrencyChange={(currency) => setTo(currency)}
+                            selectCurrency={to}
                             amountDisable
                         />
                     </div>

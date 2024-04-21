@@ -19,6 +19,7 @@ function App() {
       </h1>
       <Card sajid="cahiaurcode" btnText="click me" />
       <Card sajid="sajid_sulaiman" btnText="visit me" />
+      {/* <App/> */}
     </>
   );
 }
