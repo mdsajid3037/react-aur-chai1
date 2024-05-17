@@ -34,7 +34,7 @@ function App() {
      }, [])
 
      useEffect(()=>{
-      localStorage.setItem("todos",JSON.stringify("todos"))
+               localStorage.setItem("todos",JSON.stringify("todos"))
      }, [todos])
      
 
